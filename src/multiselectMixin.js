@@ -475,7 +475,9 @@ export default {
       } else {
         const isSelected = this.isSelected(option)
         if (isSelected) {
-          // Do nothing;
+          if (this.closeOnSelect) this.deactivate()
+          if (this.tabToIdOnSelect) document.getElementById(this.tabToIdOnSelect).focus()
+          return;
         } else if (this.multiple) {
           this.internalValue.push(option)
         } else {
