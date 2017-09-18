@@ -39,6 +39,7 @@ export default {
     },
     handleTab (event) {
       console.log(event)
+      console.log(event.target.getAttribute('tabindex'))
     },
     addPointerElement ({ key } = 'Enter') {
       /* istanbul ignore else */
