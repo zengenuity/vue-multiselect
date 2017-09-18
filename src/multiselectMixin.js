@@ -280,6 +280,10 @@ export default {
     preserveSearch: {
       type: Boolean,
       default: false
+    },
+    tabToIdOnSelect: {
+      type: String,
+      default: null
     }
   },
   mounted () {
@@ -332,12 +336,6 @@ export default {
         : this.internalValue[0]
           ? this.getOptionLabel(this.internalValue[0])
           : this.searchable ? '' : this.placeholder
-    },
-    isOpenOrchildInFocus () {
-      console.log(this.options)
-      console.log(document.activeElement)
-      console.log(document.activeElement.tabIndex)
-      return this.isOpen || false
     }
   },
   watch: {
@@ -492,6 +490,7 @@ export default {
       }
       /* istanbul ignore else */
       if (this.closeOnSelect) this.deactivate()
+      if (this.tabToIdOnSelect) document.getElementById(this.tabToIdOnSelect).focus()
     },
     /**
      * Removes the given option from the selected options.
