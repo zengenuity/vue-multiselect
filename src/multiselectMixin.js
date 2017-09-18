@@ -332,6 +332,10 @@ export default {
         : this.internalValue[0]
           ? this.getOptionLabel(this.internalValue[0])
           : this.searchable ? '' : this.placeholder
+    },
+    isOpenOrchildInFocus () {
+      console.log(this.options);
+      return this.isOpen || false
     }
   },
   watch: {

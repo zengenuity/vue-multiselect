@@ -37,14 +37,6 @@ export default {
         'multiselect__option--selected': this.isSelected(option)
       }
     },
-    handleTab (event) {
-      console.log(event)
-      console.log(event.target.getAttribute('tabindex'))
-    },
-    shiftTab (event) {
-      console.log('shift tab')
-      console.log(event)
-    },
     addPointerElement ({ key } = 'Enter') {
       /* istanbul ignore else */
       if (this.filteredOptions.length > 0) {
