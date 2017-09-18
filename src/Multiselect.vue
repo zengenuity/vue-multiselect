@@ -1,5 +1,6 @@
 <template>
   <div
+    :tabindex="tabindex"
     :class="{ 'multiselect--active': isOpen, 'multiselect--disabled': disabled, 'multiselect--above': isAbove }"
     @focus="activate()"
     @blur="searchable ? false : deactivate()"
@@ -103,7 +104,8 @@
           </ul>
         </div>
       </transition>
-  </div>
+  </div
+    :tabindex="tabindex">
 </template>
 
 <script>
@@ -222,7 +224,7 @@
       },
       tabindex: {
         type: Number,
-        default: 0
+        default: null
       }
     },
     computed: {
