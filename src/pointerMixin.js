@@ -41,6 +41,10 @@ export default {
       console.log(event)
       console.log(event.target.getAttribute('tabindex'))
     },
+    shiftTab (event) {
+      console.log('shift tab')
+      console.log(event)
+    },
     addPointerElement ({ key } = 'Enter') {
       /* istanbul ignore else */
       if (this.filteredOptions.length > 0) {
