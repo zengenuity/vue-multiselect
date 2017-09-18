@@ -335,6 +335,7 @@ export default {
     },
     isOpenOrchildInFocus () {
       console.log(this.options)
+      console.log(document.activeElement)
       return this.isOpen || false
     }
   },
