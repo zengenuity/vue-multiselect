@@ -43,11 +43,11 @@
           :disabled="disabled"
           @input="updateSearch($event.target.value)"
           @focus.prevent="activate()"
-          @blur="deactivate()"
+          @blur.prevent="deactivate()"
           @keyup.esc="deactivate()"
           @keydown.down.prevent="pointerForward()"
           @keydown.up.prevent="pointerBackward()"
-          @keydown.tab.self="addPointerElement($event)"
+          @keydown.tab.self="handleTab($event)"
           @keydown.enter.prevent.stop.self="addPointerElement($event)"
           @keydown.delete.stop="removeLastElement()"
           class="multiselect__input"/>
