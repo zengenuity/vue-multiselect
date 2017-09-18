@@ -336,6 +336,7 @@ export default {
     isOpenOrchildInFocus () {
       console.log(this.options)
       console.log(document.activeElement)
+      console.log(document.activeElement.tabIndex)
       return this.isOpen || false
     }
   },
