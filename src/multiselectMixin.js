@@ -475,6 +475,7 @@ export default {
       } else {
         const isSelected = this.isSelected(option)
         if (isSelected) {
+          this.deactivate()
           //if (key !== 'Tab') this.removeElement(option)
           return
         } else if (this.multiple) {
