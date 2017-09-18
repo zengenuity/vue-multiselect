@@ -334,7 +334,7 @@ export default {
           : this.searchable ? '' : this.placeholder
     },
     isOpenOrchildInFocus () {
-      console.log(this.options);
+      console.log(this.options)
       return this.isOpen || false
     }
   },
