@@ -455,6 +455,9 @@ export default {
 
       return this.customLabel(option, this.label) || ''
     },
+    handleTab (event) {
+      console.log(event)
+    },
     /**
      * Add the given option to the list of selected options
      * or sets the option as the selected option.
@@ -476,6 +479,9 @@ export default {
         const isSelected = this.isSelected(option)
         if (isSelected) {
           // Do nothing.
+          if (this.closeOnSelect) this.deactivate()
+          if (this.tabToIdOnSelect) document.getElementById(this.tabToIdOnSelect).focus()
+          return
         } else if (this.multiple) {
           this.internalValue.push(option)
         } else {
