@@ -455,9 +455,6 @@ export default {
 
       return this.customLabel(option, this.label) || ''
     },
-    handleTab (event) {
-      console.log(event)
-    },
     /**
      * Add the given option to the list of selected options
      * or sets the option as the selected option.
