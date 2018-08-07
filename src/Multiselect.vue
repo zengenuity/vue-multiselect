@@ -1,6 +1,6 @@
 <template>
   <div
-    :tabindex="tabindex"
+    :tabindex="searchable ? -1 : tabindex"
     :class="{ 'multiselect--active': isOpen, 'multiselect--disabled': disabled, 'multiselect--above': isAbove }"
     @focus="activate()"
     @blur="searchable ? false : deactivate()"
@@ -12,7 +12,7 @@
         <div @mousedown.prevent.stop="toggle()" class="multiselect__select"></div>
       </slot>
       <slot name="clear" :search="search"></slot>
-      <div ref="tags" class="multiselect__tags">
+      <div ref="tags" class="multiselect__tags" :class="inputContainerClass">
         <div class="multiselect__tags-wrap" v-show="visibleValue.length > 0">
           <template v-for="option of visibleValue" @mousedown.prevent>
             <slot name="tag" :option="option" :search="search" :remove="removeElement">
@@ -40,6 +40,7 @@
           :style="inputStyle"
           :value="isOpen ? search : currentOptionLabel"
           :disabled="disabled"
+          :tabindex="tabindex"
           @input="updateSearch($event.target.value)"
           @focus.prevent="activate()"
           @blur.prevent="deactivate()"
@@ -48,10 +49,12 @@
           @keydown.up.prevent="pointerBackward()"
           @keydown.enter.prevent.stop.self="addPointerElement($event)"
           @keydown.delete.stop="removeLastElement()"
-          class="multiselect__input"/>
+          class="multiselect__input"
+          :class="inputClass"/>
         <span
           v-if="!searchable"
           class="multiselect__single"
+          @mousedown.prevent="toggle"
           v-text="currentOptionLabel">
         </span>
       </div>
@@ -59,6 +62,7 @@
         <div
           class="multiselect__content-wrapper"
           v-show="isOpen"
+          @focus="activate"
           @mousedown.prevent
           :style="{ maxHeight: optimizedHeight + 'px' }"
           ref="list">
@@ -75,6 +79,7 @@
                   v-if="!(option && (option.$isLabel || option.$isDisabled))"
                   :class="optionHighlight(index, option)"
                   @click.stop="select(option)"
+                  @touchstart.stop.prevent="handleTouchStartStop(index, option)"
                   @mouseenter.self="pointerSet(index)"
                   :data-select="option && option.isTag ? tagPlaceholder : selectLabelText"
                   :data-selected="selectedLabelText"
@@ -249,7 +254,8 @@
       },
       inputStyle () {
         if (this.multiple && this.value && this.value.length) {
-          return this.isOpen ? { 'width': 'auto' } : { 'display': 'none' }
+          // Hide input by setting the width to 0 allowing it to receive focus
+          return this.isOpen ? { 'width': 'auto' } : { 'width': '0', 'position': 'absolute' }
         }
       },
       contentStyle () {
@@ -389,6 +395,7 @@ fieldset[disabled] .multiselect {
   transition: border 0.1s ease;
   box-sizing: border-box;
   margin-bottom: 8px;
+  vertical-align: top;
 }
 
 .multiselect__tag ~ .multiselect__input,
@@ -434,8 +441,11 @@ fieldset[disabled] .multiselect {
   color: #fff;
   line-height: 1;
   background: #41B883;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
 }
 
 .multiselect__tag-icon {
