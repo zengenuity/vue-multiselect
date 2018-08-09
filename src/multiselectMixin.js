@@ -515,7 +515,7 @@ export default {
         if (isSelected) {
           // Do nothing.
           if (this.closeOnSelect) this.deactivate()
-          if (this.tabToIdOnSelect) document.getElementById(this.tabToIdOnSelect).focus()
+          if (this.tabToIdOnSelect) setTimeout(this.tabToId, 10)
           return
         } else if (this.multiple) {
           this.internalValue.push(option)
@@ -530,6 +530,9 @@ export default {
       }
       /* istanbul ignore else */
       if (this.closeOnSelect) this.deactivate()
+      if (this.tabToIdOnSelect) setTimeout(this.tabToId, 10)
+    },
+    tabToId() {
       if (this.tabToIdOnSelect) document.getElementById(this.tabToIdOnSelect).focus()
     },
     /**
