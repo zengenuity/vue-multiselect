@@ -532,7 +532,7 @@ export default {
       if (this.closeOnSelect) this.deactivate()
       if (this.tabToIdOnSelect) setTimeout(this.tabToId, 10)
     },
-    tabToId() {
+    tabToId () {
       if (this.tabToIdOnSelect) document.getElementById(this.tabToIdOnSelect).focus()
     },
     /**
