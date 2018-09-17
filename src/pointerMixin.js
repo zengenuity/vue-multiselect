@@ -38,8 +38,10 @@ export default {
   },
   methods: {
     optionHighlight (index, option) {
+      let thisIndex = parseInt(index)
+      let thisPointer = parseInt(this.pointer)
       return {
-        'multiselect__option--highlight': index === this.pointer && this.showPointer,
+        'multiselect__option--highlight': thisIndex === thisPointer && this.showPointer,
         'multiselect__option--selected': this.isSelected(option)
       }
     },

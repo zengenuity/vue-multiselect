@@ -585,7 +585,15 @@ export default {
       /* istanbul ignore else */
       if (this.isOpen || this.disabled) return
 
+      for (let i in this.filteredOptions) {
+        if (this.isSelected(this.filteredOptions[i])) {
+          this.pointerSet(i)
+          this.showPointer = true
+        }
+      }
+
       this.adjustPosition()
+
       /* istanbul ignore else  */
       if (this.groupValues && this.pointer === 0 && this.filteredOptions.length) {
         this.pointer = 1
